@@ -5,23 +5,22 @@ const Timer = () => {
     const [inputMinutes,setinputMinutes] = useState('3');
     const [minutes,setMinutes] = useState('03');
     const [seconds,setSeconds] = useState('00');
-    const [active,setActive] = useState(false);
+    const [isActive,setIsActive] = useState(false);
     const [isRunning,setIsRunning] = useState(false);
     const [isPause,setIsPause] = useState(false);
     const [currentTimer,setcurrentTimer] = useState(null);
 
     useEffect(() => {
         let intervalId;
-        if(active){
-            let timer = currentTimer;
-            let min,sec;
+        if(isActive){
+            let timer = currentTimer,minute,seconds;
             intervalId =  setInterval(() => {
-                min = Math.floor(timer % 3600 / 60);
-                sec = Math.floor(timer % 3600 % 60);
-                min = min < 10 ? "0" + min : min;
-                sec = sec < 10 ? "0" + sec : sec;
-                setMinutes(min);
-                setSeconds(sec);
+                minute = Math.floor(timer % 3600 / 60);
+                seconds = Math.floor(timer % 3600 % 60);
+                minute = minute < 10 ? "0" + minute : minute;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                setMinutes(minute);
+                setSeconds(seconds);
                 if (--timer < 0) {
                     stopTimer();
                 }
@@ -29,30 +28,30 @@ const Timer = () => {
             }, 1000);
         }
         return () => clearInterval(intervalId);
-    }, [active]);
+    }, [isActive]);
 
     
     function startTimer() {
         let duration = 60 * minutes;
         setcurrentTimer(duration);
-        setActive(!active);
+        setIsActive(!isActive);
         setIsRunning(!isRunning);
     }
 
     function resumeTimer() {
-        setActive(!active);
+        setIsActive(!isActive);
         setIsPause(!isPause)
     }
 
     function pauseTimer() {
-        setActive(!active);
+        setIsActive(!isActive);
         setIsPause(!isPause);
     }
     
     function stopTimer() {
         setMinutes(`0${inputMinutes}`);
         setSeconds('00');
-        setActive(false);
+        setIsActive(false);
         setIsPause(false);
         setIsRunning(!isRunning);
         setcurrentTimer(null);
@@ -60,7 +59,7 @@ const Timer = () => {
 
     const handleMinuteChange = (e) =>{
         let minutes = e.target.value;
-        setActive(false);
+        setIsActive(false);
         setinputMinutes(minutes);
         setMinutes(`0${minutes}`);
         setSeconds('00');
