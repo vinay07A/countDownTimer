@@ -33,22 +33,18 @@ const Timer = () => {
 
     
     function startTimer() {
-        let duration = currentTimer == null ? 60 * minutes : currentTimer;
+        let duration = 60 * minutes;
         setcurrentTimer(duration);
         setActive(!active);
         setIsRunning(!isRunning);
     }
 
     function resumeTimer() {
-        let duration = currentTimer == null ? 60 * minutes : currentTimer;
-        setcurrentTimer(duration);
         setActive(!active);
         setIsPause(!isPause)
     }
 
     function pauseTimer() {
-        let duration = currentTimer == null ? 60 * minutes : currentTimer;
-        setcurrentTimer(duration);
         setActive(!active);
         setIsPause(!isPause);
     }
@@ -56,7 +52,7 @@ const Timer = () => {
     function stopTimer() {
         setMinutes(`0${inputMinutes}`);
         setSeconds('00');
-        setActive(!active);
+        setActive(false);
         setIsPause(false);
         setIsRunning(!isRunning);
         setcurrentTimer(null);
