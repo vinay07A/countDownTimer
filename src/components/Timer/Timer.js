@@ -59,8 +59,8 @@ const Timer = () => {
     }
 
     const handleMinuteChange = (e) =>{
-        setActive(false);
         let minutes = e.target.value;
+        setActive(false);
         setinputMinutes(minutes);
         setMinutes(`0${minutes}`);
         setSeconds('00');
@@ -68,23 +68,22 @@ const Timer = () => {
     }
    
     return (
-        <>
-            
-            <div className='container'>
-                <input 
-                className={`minutes ${isRunning ? 'hide' : ''}`}
-                type="text" 
-                value={inputMinutes} 
-                maxLength={2} 
-                placeholder="Enter minutes here..."
-                onChange={handleMinuteChange}/>
-                <div className="timer">
-                    <div className="runtimer">
-                        <span className="minutes">{minutes}</span>
-                        <span>:</span>
-                        <span className="seconds">{seconds}</span>
-                    </div>
-                    <div className="button-actions">
+        <div className='container'>
+            <input 
+            className={`minutes ${isRunning ? 'hide' : ''}`}
+            type="text" 
+            id="minutes"
+            value={inputMinutes} 
+            maxLength={2} 
+            placeholder="Enter minutes here..."
+            onChange={handleMinuteChange}/>
+            <div className="timer">
+                <div className="runtimer">
+                    <span className="minutes">{minutes}</span>
+                    <span>:</span>
+                    <span className="seconds">{seconds}</span>
+                </div>
+                <div className="button-actions">
                     {!isRunning 
                         ? 
                         <button className='start' onClick={() => startTimer()}>Start</button>
@@ -101,7 +100,6 @@ const Timer = () => {
                 </div>
             </div>
         </div>
-        </>
         
     );
 };
