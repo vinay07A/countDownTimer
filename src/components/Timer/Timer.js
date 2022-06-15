@@ -23,7 +23,7 @@ const Timer = () => {
                 setMinutes(min);
                 setSeconds(sec);
                 if (--timer < 0) {
-                    timer = currentTimer;
+                    stopTimer();
                 }
                 setcurrentTimer(timer);
             }, 1000);
