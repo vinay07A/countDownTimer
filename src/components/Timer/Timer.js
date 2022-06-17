@@ -50,6 +50,7 @@ const Timer = () => {
     
     function stopTimer() {
         setMinutes(`0${inputMinutes}`);
+        inputMinutes < 10 ?  setMinutes(`0${inputMinutes}`) :  setMinutes(inputMinutes);
         setSeconds('00');
         setIsActive(false);
         setIsPause(false);
@@ -59,11 +60,16 @@ const Timer = () => {
 
     const handleMinuteChange = (e) =>{
         let minutes = e.target.value;
-        setIsActive(false);
-        setinputMinutes(minutes);
-        setMinutes(`0${minutes}`);
-        setSeconds('00');
-        setcurrentTimer(null);
+        const re = /^(?!0)[0-9]+$/;
+        if (minutes === '' || re.test(minutes)) {
+            console.log(minutes)
+            setIsActive(false);
+            setinputMinutes(minutes);
+            minutes < 10 ? setMinutes(`0${minutes}`) : setMinutes(minutes);
+            setSeconds('00');
+            setcurrentTimer(null);
+        }
+       
     }
    
     return (
